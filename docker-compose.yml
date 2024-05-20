@@ -37,4 +37,4 @@ services:
       - "3000:3000"
     volumes:
       - ./multi-step-wizard-frontend:/appfrontend
-      - /appfrontend/node_modules
+      - /multi-step-wizard-frontend/node_modules

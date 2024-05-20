@@ -1,7 +1,7 @@
 // src/features/wizard/components/Wizard.tsx
 import React, { useEffect, useState } from "react";
 import { fetchWizard } from "../api/wizardApi";
-import Question from "./questions";
+import Questions from "./Questions";
 
 interface WizardStep {
   id: number;
@@ -26,10 +26,10 @@ const Wizard: React.FC = () => {
     const fetchWizardData = async () => {
       setStatus("loading");
       try {
-        const data = await fetchWizard();
+        const data = await fetchWizard(1);
         setWizardData(data[0].steps);
         setStatus("succeeded");
-      } catch (error) {
+      } catch (error: any) {
         setStatus("failed");
         setError(error.message);
       }
@@ -73,7 +73,7 @@ const Wizard: React.FC = () => {
       </h2>
       <h3>{currentStepData.title}</h3>
       {currentStepData.questions.map((question, index) => (
-        <Question key={index} question={question} />
+        <Questions key={index} question={question} />
       ))}
       <div>
         {currentStep > 0 && (

@@ -1,4 +1,3 @@
-// src/wizard/wizard.controller.ts
 import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import Wizard from '../../entities/wizards.entity';
 import { WizardService } from './wizards.service';
@@ -14,6 +13,7 @@ export class WizardController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Wizard> {
+    console.log('id', id)
     return this.wizardService.findOne(Number(id));
   }
 

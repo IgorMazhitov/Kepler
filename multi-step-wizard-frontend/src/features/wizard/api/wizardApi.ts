@@ -1,8 +1,11 @@
-// src/api/wizardApi.ts
-
 import axiosInstance from "../../../api/axiosConfig";
 
-export const fetchWizard = async () => {
-  const response = await axiosInstance.get('/wizard');
+
+export const fetchWizard = async (id: number) => {
+  const response = await axiosInstance.get('/wizard', {
+    params: {
+      id,
+    }
+  });
   return response.data;
 };
