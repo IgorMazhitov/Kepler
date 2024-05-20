@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: kepler
+      POSTGRES_USER: kepler
+      POSTGRES_PASSWORD: kepler
+    container_name: postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  backend:
+    build:
+      context: ./wizard-backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - '3300:3300'
+    depends_on:
+      - db
+    volumes:
+      - ./wizard-backend/src:/app/src
+
+  frontend:
+    container_name: frontend
+    depends_on:
+      - backend
+    build:
+      context: ./multi-step-wizard-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./multi-step-wizard-frontend:/appfrontend
+      - /appfrontend/node_modules
