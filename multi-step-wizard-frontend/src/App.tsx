@@ -1,13 +1,22 @@
 import React from "react";
-import WizardPage from "../src/features/wizard/WizardsPage";
+import WizardPage from "./features/wizard/WizardsPage";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
-const App = () => {
+export default function App() {
   return (
-    <div>
-      <h1>Multi-step Wizard</h1>
-      <WizardPage />
-    </div>
+    <Provider store={store}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <h1>Multi-step Wizard</h1>
+        <WizardPage />
+      </div>
+    </Provider>
   );
 }
-
-export default App;
